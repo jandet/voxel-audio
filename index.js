@@ -78,6 +78,11 @@ exports.PositionAudio.prototype.createPanner = function() {
 	if (self.options.panningModel) self.panner.panningModel = self.options.panningModel;
 };
 
+exports.PositionAudio.prototype.moveTo = function(x, y, z) {
+	self.panner.setPosition(x, y, z);
+	self.position = { x: x, y: y, z: z };
+};
+
 exports.PositionAudio.prototype.initURL = function() {
 	var self = this;
 	self.url = self.options.url;
