@@ -134,7 +134,7 @@ function tick() {
 
 	game.camera.updateMatrixWorld();
 	var position = new game.THREE.Vector3().getPositionFromMatrix(game.camera.matrixWorld);
-	var velocity = game.controls.velocity.clone();
+	var velocity = game.controls.target().velocity.clone();
 
 	audioContext.listener.setPosition(position.x, position.y, position.z);
 	audioContext.listener.setVelocity(velocity.x, velocity.y, velocity.z);
