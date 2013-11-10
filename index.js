@@ -17,7 +17,7 @@ var bresenham3d = require('bresenham3d'),
 
 
 exports.initGameAudio = function(game_, settings) {
-	audioContext = new webkitAudioContext();
+	audioContext = createAudioContext();
 	audioDestination = audioContext.destination;
 	game = game_;
 
@@ -136,7 +136,15 @@ exports.PositionAudio.prototype.load = function(callback) {
 	request.send();
 };
 
-
+function createAudioContext() {
+	if ('AudioContext' in window) {
+		return new window.AudioContext();
+	} else if ('webkitAudioContext' in window) {
+		return new window.webkitAudioContext();
+	} else {
+		throw new Error('AudioContext not supported!');
+	}
+}
 
 function tick() {
 
