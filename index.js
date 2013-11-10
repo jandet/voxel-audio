@@ -79,6 +79,7 @@ exports.PositionAudio.prototype.createPanner = function() {
 };
 
 exports.PositionAudio.prototype.moveTo = function(x, y, z) {
+	var self = this;
 	self.panner.setPosition(x, y, z);
 	self.position = { x: x, y: y, z: z };
 };
