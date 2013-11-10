@@ -56,7 +56,10 @@ exports.PositionAudio = function(options) {
 exports.PositionAudio.prototype.createPanner = function(options) {
 	var self = this;
 	self.panner = audioContext.createPanner();
-	self.gainNode = audioContext.createGainNode(options.gain || 1);
+	self.gainNode = audioContext.createGainNode();
+	if (options.gain) {
+		self.gainNode.gain.value = options.gain;
+	}
 
 	var startingPosition = self.options.startingPosition;
 	if (!startingPosition || startingPosition.length !== 3) throw new Error('startingPosition required option. format: [x,y,z]');
