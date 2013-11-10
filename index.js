@@ -56,7 +56,12 @@ exports.PositionAudio = function(options) {
 exports.PositionAudio.prototype.createPanner = function(options) {
 	var self = this;
 	self.panner = audioContext.createPanner();
-	self.gainNode = audioContext.createGainNode();
+	if (audioContext.createGain) {
+		self.gainNode = audioContext.createGain();
+	} else {
+		self.gainNode = audioContext.createGainNode();
+	}
+
 	if (options.gain) {
 		self.gainNode.gain.value = options.gain;
 	}
