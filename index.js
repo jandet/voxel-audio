@@ -151,15 +151,15 @@ function tick() {
 	var m = game.camera.matrixWorld;
 	// Multiply the orientation vector by the world matrix of the camera.
 	var vec = new game.THREE.Vector3(0,0,1);
-  vec.applyMatrix3(m);
+  	vec.applyMatrix3(m);
 	var direction  = vec.sub(position).normalize();
 	var vec2 = new game.THREE.Vector3(0,-1,0);
-  vec.applyMatrix3(m);
+  	vec.applyMatrix3(m);
 	var up_direction = vec2.sub(position).normalize();
 
 
 	// Set the orientation and the up-vector for the listener.
-	audioContext.listener.setOrientation(direction.x, direction.y, direction.z, up_direction.x, up_direction.y, up_direction.z);
+	audioContext.listener.setOrientation(direction.x, direction.y, direction.z, up_direction.x, -1 * up_direction.y, up_direction.z);
 
 
 	if (!calculateAbsorption) return;
