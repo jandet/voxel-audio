@@ -105,14 +105,14 @@ exports.PositionAudio.prototype.initSource = function() {
 };
 
 
-exports.PositionAudio.prototype.play = function() {
+exports.PositionAudio.prototype.play = function(delay) {
 	var self = this;
 	if (!self.ready) throw new Error('Audio not ready. Did you call load?');
 
 	self.gainNode.connect(audioDestination);
 	self.panner.connect(self.gainNode);
 	self.source.connect(self.panner);
-	if (self.source.noteOn) self.source.noteOn(0);
+	if (self.source.noteOn) self.source.noteOn(delay || 0);
 	self.isPlaying = true;
 };
 
