@@ -112,7 +112,7 @@ exports.PositionAudio.prototype.play = function(delay) {
 	self.gainNode.connect(audioDestination);
 	self.panner.connect(self.gainNode);
 	self.source.connect(self.panner);
-	if (self.source.noteOn) self.source.noteOn(delay || 0);
+	self.source.start(delay || 0);
 	self.isPlaying = true;
 };
 
