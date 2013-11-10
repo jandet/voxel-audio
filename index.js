@@ -42,7 +42,7 @@ exports.PositionAudio = function(options) {
 	if (!init) throw new Error('initGameAudio must be called first.');
 
 	self.options = options;
-	self.createPanner();
+	self.createPanner(options);
 	// need one of source, buffer, or url
 	if (options.url) self.initURL();
 	if (options.buffer) self.initBuffer();
@@ -53,10 +53,10 @@ exports.PositionAudio = function(options) {
 	audioInstances.push(self);
 };
 
-exports.PositionAudio.prototype.createPanner = function() {
+exports.PositionAudio.prototype.createPanner = function(options) {
 	var self = this;
 	self.panner = audioContext.createPanner();
-	self.gainNode   = audioContext.createGainNode();
+	self.gainNode = audioContext.createGainNode(options.gain || 1);
 
 	var startingPosition = self.options.startingPosition;
 	if (!startingPosition || startingPosition.length !== 3) throw new Error('startingPosition required option. format: [x,y,z]');
@@ -100,10 +100,9 @@ exports.PositionAudio.prototype.initBuffer = function() {
 exports.PositionAudio.prototype.initSource = function() {
 	var self = this;
 	self.source = self.options.source;
-	self.source.loop   = self.options.loop || false;
+	self.source.loop = self.options.loop || false;
 	self.ready = true;
 };
-
 
 exports.PositionAudio.prototype.play = function(delay) {
 	var self = this;
